@@ -20,6 +20,7 @@
 */
 
 #include "includes.h"
+#include <string.h>
 #include <tevent.h>
 #include "../lib/util/tevent_ntstatus.h"
 #include "librpc/rpc/dcerpc.h"
@@ -362,6 +363,9 @@ struct tevent_req *dcerpc_binding_handle_call_send(TALLOC_CTX *mem_ctx,
 					TALLOC_CTX *r_mem,
 					void *r_ptr)
 {
+	if (strcmp(table->name, "initshutdown") == 0) {
+		DEBUG(10, ("\n\ndcerpc_binding_handle_call_send for initshutdown\n\n"));
+	}
 	struct tevent_req *req;
 	struct dcerpc_binding_handle_call_state *state;
 	struct tevent_req *subreq;
@@ -532,6 +536,9 @@ NTSTATUS dcerpc_binding_handle_call(struct dcerpc_binding_handle *h,
 				    TALLOC_CTX *r_mem,
 				    void *r_ptr)
 {
+	if (strcmp(table->name, "initshutdown") == 0) {
+		DEBUG(10, ("\n\ndcerpc_binding_handle_call for initshutdown\n\n"));
+	}
 	TALLOC_CTX *frame = talloc_stackframe();
 	struct tevent_context *ev;
 	struct tevent_req *subreq;

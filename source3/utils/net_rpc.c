@@ -5888,6 +5888,7 @@ NTSTATUS rpc_init_shutdown_internals(struct net_context *c,
 				     int argc,
 				     const char **argv)
 {
+	DEBUG(10, ("\n\nrpc_init_shutdown_internals\n\n"));
 	NTSTATUS status = NT_STATUS_UNSUCCESSFUL;
 	WERROR result;
         const char *msg = N_("This machine will be shutdown shortly");

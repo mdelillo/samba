@@ -19,6 +19,7 @@
  *  along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <string.h>
 #include "includes.h"
 #include "../lib/util/tevent_ntstatus.h"
 #include "librpc/gen_ndr/ndr_epmapper_c.h"
@@ -3137,6 +3138,10 @@ NTSTATUS cli_rpc_pipe_open_noauth_transport(struct cli_state *cli,
 		  "%s and bound anonymously.\n",
 		  table->name,
 		  result->desthost));
+
+	if (strcmp(table->name, "initshutdown") == 0) {
+			DEBUG(10, ("\n\ncli_rpc_pipe_open_noauth_transport for initshutdown\n\n"));
+	}
 
 	*presult = result;
 	return NT_STATUS_OK;
